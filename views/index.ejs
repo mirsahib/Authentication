@@ -1,0 +1,58 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sign in</title>
+  </head>
+  <body>
+    <h1>Sign Up</h1>
+    <div>
+      <label>Username</label>
+      <input type="text" name="username" id="username" />
+      <label>Password</label>
+      <input type="password" name="password" id="password" />
+      <button id="submit">Sign in</button>
+      <!--<input type="button" value="login" onclick="window.location.href='/login'"></button>
+        -->
+      <button id="login">Login</button>
+    </div>
+  </body>
+
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    let user = { user: "", pass: "" };
+    $("#submit").click(() => {
+      user.user = $("#username").val();
+      user.pass = $("#password").val();
+      console.log(user);
+      $.ajax({
+        method: "POST",
+        data: user,
+        url: "/"
+      })
+        .done(function(res) {
+          console.log(res);
+        })
+        .fail(res => {
+          console.log(res);
+        });
+    });
+    $("#login").click(() => {
+      $.ajax({
+        method: "GET",
+        url: "/login"
+      })
+        .done(res => {
+          window.location.href = "/login";
+        })
+        .fail(res => {
+          console.log(res);
+        });
+    });
+  </script>
+</html>

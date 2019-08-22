@@ -1,0 +1,46 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Login</title>
+  </head>
+  <body>
+    <h1>Login</h1>
+    <div>
+      <label>Username</label>
+      <input type="text" name="username" id="username" />
+      <label>Password</label>
+      <input type="password" name="password" id="password" />
+      <button id="submit">Login</button>
+    </div>
+  </body>
+
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"
+  ></script>
+  <script>
+    $("#submit").click(() => {
+      user = $("#username").val();
+      pass = $("#password").val();
+      //console.log(user);
+      $.ajax({
+        method: "POST",
+        data: { username: user, password: pass },
+        url: "/login",
+        dataType: "json"
+      })
+        .done(res => {
+          console.log(res);
+          //var page = $.parseHTML(res);
+          //console.log(page);
+          //console.log("hello");
+        })
+        .fail(res => {
+          console.log(res);
+        });
+    });
+  </script>
+</html>
