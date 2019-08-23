@@ -4,7 +4,7 @@ const router = express.Router();
 const User = require("../models/user");
 
 router.get("/", (req, res) => {
-  res.render("index");
+  res.status(200).render("index");
 });
 router.post("/", (req, res) => {
   const user = req.body;

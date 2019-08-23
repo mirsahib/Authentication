@@ -4,24 +4,20 @@ const User = require("../models/user");
 
 // add local authentication strategy with a verification function
 passport.use(
-  new LocalStrategy(
-    // your verification logic goes here
-    // this test verification function always succeeds and returns a hard-coded user
-    function(user, pass, done) {
-      console.log("Verification function called");
-      //console.log(username + " " + password);
-      return User.findOne({ username: user, password: pass }).then(user => {
-        if (!user) {
-          return done(null, false, {
-            message: "Incorrect email or password."
-          });
-        }
-        return done(null, user, { message: "Logged In Successfully" });
-      });
-      //.catch(err => done(err));
-      //return done(null, { user, pass });
-    }
-  )
+  new LocalStrategy(function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false, { message: "Incorrect username." });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: "Incorrect password." });
+      }
+      return done(null, user);
+    });
+  })
 );
 
 // serialize user object

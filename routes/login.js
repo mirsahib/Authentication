@@ -13,13 +13,15 @@ router.post("/", function(req, res, next) {
     if (err) {
       return next(err);
     }
-    if (!user) {
+    if (!user && info) {
+      //console.log(info);
       return res.status(401).send(info);
     }
     req.logIn(user, function(err) {
       if (err) {
         return next(err);
       }
+      //console.log("req");
       const token = jwt.sign(user.toJSON(), "mirsahib");
       var id = user._id;
       //console.log(user.toJSON());

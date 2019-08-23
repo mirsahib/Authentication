@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const passport = require("passport");
 var bodyParser = require("body-parser");
+const path = require("path");
 
 require("./config/passport");
 
@@ -25,6 +26,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+//setting static folder
+app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", require("./routes/index.js"));
 app.use("/login", require("./routes/login"));
