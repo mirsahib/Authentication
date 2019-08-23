@@ -22,6 +22,7 @@ passport.use(
   })
 );
 
+//passport jwt authorisation
 var opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("JWT");
 opts.secretOrKey = "mirsahib";
@@ -29,7 +30,7 @@ opts.ignoreExpiration = true;
 
 passport.use(
   new JwtStrategy(opts, function(jwt_payload, done) {
-    console.log("controls comes here");
+    console.log("controls comes here"); //this log never prints on the terminal
     User.findOne({ username: jwt_payload.username }, function(err, user) {
       if (err) {
         return done(err, false);
