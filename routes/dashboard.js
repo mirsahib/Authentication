@@ -6,7 +6,7 @@ router.get("/", (req, res) => {
   //console.log(req.token);
   //res.send(req.body);
   //res.render("dashboard");
-  console.log(req.session);
+  console.log(req.body);
   res.render("dashboard");
   //res.send("Auth");
 });
