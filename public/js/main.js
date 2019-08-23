@@ -11,9 +11,8 @@ $(document).ready(() => {
     })
       .done(res => {
         console.log(res);
-        //var page = $.parseHTML(res);
-        //console.log(page);
-        //console.log("hello");
+        localStorage.setItem("token", res.token);
+        localStorage.setItem("id", res.id);
       })
       .fail(res => {
         console.log(res);
