@@ -19,7 +19,7 @@
     if (token && userId) {
       $.ajax({
         method: "GET",
-        headers: { Authorization: "Bearer " + token },
+        headers: { Authorization: "JWT" + token },
         url: "/dashboard"
       })
         .done(function(response) {

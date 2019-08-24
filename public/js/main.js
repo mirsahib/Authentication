@@ -13,6 +13,7 @@ $(document).ready(() => {
         console.log(res);
         localStorage.setItem("token", res.token);
         localStorage.setItem("id", res.id);
+        window.location.href = "/dashboard";
       })
       .fail(res => {
         console.log(res);
